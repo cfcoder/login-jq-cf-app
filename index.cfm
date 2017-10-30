@@ -14,9 +14,10 @@
 
   <body>
 
-		<div id="login" class="container text-center">
+    <div id="submitResponse" class="text-center">&nbsp;</div>
+
+		<div id="login" class="container text-center" data-logged="<cfoutput><cfif isDefined('session.userAuthorized')>#session.userAuthorized#<cfelse>0</cfif></cfoutput>" style="display:none">
       <img src="img/EnvianceLogo.png" />
-      <div id="submitSuccess"></div>
 
       <form id="signin" class="form-signin" method="post" action="javascript:alert('success!');">
         <h2 class="form-signin-heading text-center">System Login</h2>
@@ -35,7 +36,7 @@
     </div> <!-- end login container -->
 
     <div id="loggedin" class="container text-center">
-      <h2>You are in.</h2>
+      <h2>You are in</h2>
       <div id="signout" class="text-center">
         <button id="signoutbtn" class="btn btn-lg btn-primary btn-block" type="submit">Sign out</button>
       </div>
@@ -46,7 +47,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script> -->
     <script src="js/bootstrap.js"></script>
-    <script src="js/scripts.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>
 
