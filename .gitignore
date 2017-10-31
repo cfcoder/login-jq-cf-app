@@ -32,7 +32,6 @@
 ._*
 .Spotlight-V100
 .Trashes
-.vscode
 ehthumbs.db
 Thumbs.db
 
@@ -42,4 +41,8 @@ CFIDE/
 WEB-INF/
 cf_scripts/
 crossdomain.xml
-dbquery-test.cfm 
+dbquery-test.cfm
+
+# Miscellaneous stuff #
+#######################
+.vscode/
