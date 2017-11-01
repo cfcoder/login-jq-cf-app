@@ -6,8 +6,8 @@ component displayname="Security API" output="false" extends="BaseAPI" {
   *  the constructor method 
   */
   public Security function init() output="false" {
-    this.AuthService = createObject('component', 'services.auth.AuthService');  
-    this.DataService = createObject('component', 'services.auth.DataService');  
+    this.AuthService = createObject('component', 'service.auth.AuthService');  
+    this.DataService = createObject('component', 'service.auth.DataService');  
     return this;
   }
 

@@ -31,9 +31,9 @@ component
     if(isDefined("session")) structClear(session);
     
     // create some component objects
-    application.BaseAPI     = createObject('component', 'services.api.BaseAPI');
-    application.Security    = createObject('component', 'services.api.Security').init();
-    application.userService = createObject('component', 'services.user.userService').init();
+    application.BaseAPI     = createObject('component', 'service.api.BaseAPI');
+    application.Security    = createObject('component', 'service.api.Security').init();
+    application.userService = createObject('component', 'service.user.userService').init();
     
     writeLog(log="Application", text="Application #this.name# started.", type="information");
 		return true;

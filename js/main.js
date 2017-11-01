@@ -27,7 +27,7 @@ const post_login = (username, pword) => {
 
   $.ajax({
     type: 'POST',
-    url: './services/api/Security.cfc',
+    url: './service/api/Security.cfc',
     dataType: 'JSON',
     data: {
         'method':'postLogin',
@@ -62,7 +62,7 @@ const post_logout = () => {
   
   $.ajax({
     type: 'POST',
-    url: './services/api/Security.cfc',
+    url: './service/api/Security.cfc',
     dataType: 'JSON',
     data: {'method':'postLogout'},
     success: function(response, status, jqXHR) {

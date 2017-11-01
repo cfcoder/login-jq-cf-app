@@ -3,7 +3,7 @@ component {
   *  the constructor method 
   */
   public UserService function init() output="false" {
-    this.dataService = createObject('component', 'services.user.dataService').init();  
+    this.dataService = createObject('component', 'service.user.dataService').init();  
     return this;
   }
 

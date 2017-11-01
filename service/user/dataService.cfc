@@ -3,11 +3,14 @@ component {
   * I am the constructor method
   */
   public DataService function init() output="false" {
-    this.AuthService = createObject('component', 'services.auth.AuthService');  
+    this.AuthService = createObject('component', 'service.auth.AuthService');  
     return this;
   }
   
-  public any function addUser(firstName, lastName, username, password) {
+  /*
+  * I add a user record to the database. containing their firstname, lastname, username and hashed password and hashed salt.
+  */
+  public any function addUser(firstName, lastName, username, password) output="false" {
     var randSalt     = this.AuthService.generateRandSalt();
     var passwordHash = this.AuthService.hashPassword(password=arguments.password, salt=randSalt);
 
