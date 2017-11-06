@@ -7,9 +7,9 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <title>Enviance Demo Login</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles -->
-    <link href="css/style.css" rel="stylesheet">
+    <link type="text/css" href="css/style.min.css" rel="stylesheet">
   </head>
 
   <body>
