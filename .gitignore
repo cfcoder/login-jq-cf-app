@@ -45,5 +45,6 @@ dbquery-test.cfm
 
 # Miscellaneous stuff #
 #######################
+node_modules/
 .vscode/
 config.codekit3
