@@ -5,8 +5,8 @@ const validate_username = inUserName => {
 
   // make sure we have a string type input
   if(typeof(inUserName) === 'string') {
-    // no special chars or spaces allowed
-    if(!/[^a-zA-Z0-9]/.test(inUserName)) {
+    // no special chars or spaces allowed except @ and _
+    if(!/[^a-zA-Z0-9@_.]/.test(inUserName)) {
       // must be > or = min_len and < or = max_len
       if(inUserName.length >= min_len && inUserName.length <= max_len) {
         success = true;
@@ -138,7 +138,7 @@ $(document).ready(function() {
       post_login(inUserName, inPassword);
 
     } else {
-      $("#submitResponse").html("There was a problem... invalid Username or Password.<br />Username max length: 30<br />Password min length: 8").show();
+      $("#submitResponse").html("There was a problem... invalid Username or Password.").show();
     }
 
   });

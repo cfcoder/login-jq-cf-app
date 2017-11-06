@@ -38,6 +38,12 @@ describe('Tests for main.js', function() {
       assert.isFalse(unameOk, 'username ' + uname + ' is of type ' + typeof(uname));
     });
 
+    it('should return true when username contains "@", "," and "_" chars', function() {
+      var uname = 'bob_hope@comedy.com';
+      var unameOk = validate_username(uname);
+      assert.isTrue(unameOk, 'username ' + uname + ' does not contain valid chars');
+    });
+
     it('should return false when the length of username is 0', function() {
       var unameOk = validate_username('');
       assert.isFalse(unameOk, 'length is non-zero');
