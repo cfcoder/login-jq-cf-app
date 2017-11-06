@@ -3,9 +3,15 @@ const validate_username = inUserName => {
   const max_len = 30;
   let success = false;
 
-  // must be > or = min_len and < or = max_len
-  if(inUserName.length >= min_len && inUserName.length <= max_len) {
-    success = true;
+  // make sure we have a string type input
+  if(typeof(inUserName) === 'string') {
+    // no special chars or spaces allowed
+    if(!/[^a-zA-Z0-9]/.test(inUserName)) {
+      // must be > or = min_len and < or = max_len
+      if(inUserName.length >= min_len && inUserName.length <= max_len) {
+        success = true;
+      }
+    }
   }
   return success;
 };
@@ -16,9 +22,15 @@ const validate_password = inPassword => {
   const max_len = 30;
   let success = false;
 
-  // must be > or = min_len and < or = max_len
-  if(inPassword.length >= min_len && inPassword.length <= max_len) {
-    success = true;
+  // make sure we have a string type input
+  if(typeof(inPassword) === 'string') {
+    // no special chars or spaces allowed
+    if(!/[^a-zA-Z0-9]/.test(inPassword)) {
+      // must be > or = min_len and < or = max_len
+      if(inPassword.length >= min_len && inPassword.length <= max_len) {
+        success = true;
+      }
+    }
   }
   return success;
 };
