@@ -30,7 +30,8 @@
     "jsdom": "11.3.0",
     "jsdom-global": "3.0.2",
     "mocha": "^4.0.1",
-    "sinon": "^4.1.1"
+    "sinon": "^4.1.1",
+    "sinon-chai": "^2.14.0"
   },
   "dependencies": {}
 }
