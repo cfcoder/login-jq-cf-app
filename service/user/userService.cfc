@@ -1,14 +1,17 @@
-component {
+/*
+* I am the userService component for the user services
+*/
+component displayname="UserService" output="false" {
   /* 
   *  the constructor method 
   */
   public UserService function init() output="false" {
-    this.dataService = createObject('component', 'service.user.dataService').init();  
     return this;
   }
 
   /* 
   * I check a string passed in to make sure it is valid for the USER table names.
+  * @name the name string value to be validated
   */
   private boolean function checkName(required string name) output="false" {
     var nameMaxLength = 30;
@@ -24,6 +27,7 @@ component {
 
   /*
   * I check a string passed in to make sure it is valid for the USER table username
+  * @uname the username string value to be validated
   */
   public boolean function checkUsername(required string uname) output="false"{
     var unameMinLength = 5;
@@ -43,6 +47,7 @@ component {
 
   /*
   * I check a string passed in to make sure it is valid for the USER table password
+  * @pword the password string value to be validated
   */
   public boolean function checkPassword(required string pword) output="false" {
     var pwordMinLength = 8;
@@ -64,7 +69,8 @@ component {
   * I trim the input user data passed in as a struct,
   */
   public struct function trimUserData(required struct user) output="false" {
-    var userTrimmed = structNew();
+    var userTrimmed = {};
+
     // If all form fields are present, check each for valid input
     if( IsDefined("user.firstname") ) userTrimmed.firstname = trim(user.firstname);
     if( IsDefined("user.lastname") )  userTrimmed.lastname  = trim(user.lastname);
@@ -76,11 +82,16 @@ component {
 
 
   /* 
-  * I validate the user data passed in as a struct,
+  * I validate the user data passed in as a struct.
+  * @user a user struct containing a set of user data
   */
   public boolean function validateUserData(required struct user) output="false" {
     // trim the input field data
     var userDataValid = false;
+    var fnameValid    = false;
+    var lnameValid    = false;
+    var unameValid    = false;
+    var pwordValid    = false;
 
     // If all required form fields are present, check each for valid input
     if(   IsDefined("user.firstname") 

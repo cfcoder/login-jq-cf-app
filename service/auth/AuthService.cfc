@@ -1,11 +1,15 @@
 /** 
-* This component contains API methods related to login authorization.
+* This is the AuthService component for the auth services
 */ 
-component displayname="Auth Service" output="false" { 
-  this.saltLength = 128;
+component displayname="AuthService" output="false" {
+  // create additional cfc objects used below
+  variables.DataService = new service.auth.DataService();
+  variables.UserService = new service.user.UserService().init();
 
   /* 
-  * I validate the user data passed in as a struct,
+  * I validate the user data passed in as a struct.
+  * @username this is the username
+  * @password this is the password
   */
   public boolean function validateLoginData(required string username, required string password) output="false" {
     // trim the input field data
@@ -14,8 +18,8 @@ component displayname="Auth Service" output="false" {
     var pwOK          = false;
 
     // check username and password are valid
-    unameOK = Application.userService.checkUsername(arguments.username);
-    pwOK    = Application.userService.checkPassword(arguments.password);
+    unameOK = variables.UserService.checkUsername(arguments.username);
+    pwOK    = variables.UserService.checkPassword(arguments.password);
 
     // Check to see if a valid user was returned
     if(unameOK and pwOK) {
@@ -25,18 +29,20 @@ component displayname="Auth Service" output="false" {
   }
 
 
-  /** 
-  * This method will authenticate the login username and password comparing with the database USER_AUTH table
+  /*
+  * This method will authenticate the login username and password comparing with the database USER_AUTH table.
+  * @username this is the username
+  * @password this is the password
   */ 
-  public boolean function authenticateLoginData(required string username="", required string password="") output="true" {
+  public boolean function authenticateLoginData(required string username='', required string password='') output="true" {
   
     // Set local var for query
-    var usernameInput    = arguments.username;
-    var passwordInput    = arguments.password;
-    var authenticationOK = false;
+    var usernameInput       = arguments.username;
+    var passwordInput       = arguments.password;
+    var authenticationOK    = false;
+    var passwordInputHashed = '';
+    var userAuth            = variables.DataService.getUserAuth(usernameInput); // get a USER_AUTH user record for the given username
     
-    var userAuth = Application.Security.dataService.getUserAuth(usernameInput);
-
     // Using the username, get the hashed password and the salt (If the username is invalid, then nothing will be returned)
 
     // if the query finds a record for the username, lets look at the passwords
@@ -64,7 +70,7 @@ component displayname="Auth Service" output="false" {
     var lowerAlphabets = "abcdefghijklmnopqrstuvwxyz";
     var upperAlphabets = uCase(lowerAlphabets);
     var numbers = "0123456789";
-    var saltLength = this.saltLength || 16; // 16 bytes * 8 = 128 bit salt
+    var saltLength = 128; // 128 bit salt
       
     var saltBase = lowerAlphabets & upperAlphabets & numbers;
     var salt = "";
@@ -76,12 +82,17 @@ component displayname="Auth Service" output="false" {
   }
 
 
-  /** 
+  /*
   * This method creates a hash of the password string passed in
+  * @password this is the password
+  * @salt this is the salt used in the hash of the password
   */ 
   public string function hashPassword(required string password, string salt='') output="false" {
     return Hash(arguments.password & arguments.salt, 'SHA-512', 'UTF-8', 1024);
   }
+
+
+
 
 //   /** 
 //   * This method will validate a user
