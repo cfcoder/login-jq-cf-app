@@ -9,20 +9,31 @@
     <title>Enviance Demo User Admin</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles -->
-    <link href="css/admin.css" rel="stylesheet">
+    <link href="css/admin.min.css" rel="stylesheet">
   </head>
 
   <body>
-		<div id="user" class="container text-center">
+    <cfscript>
+      // create required cfc objects used below
+      variables.UserService = new service.user.UserService().init();
+      // variables.DataService = new service.user.DataService().init();
+    </cfscript>
+
+    <div id="user" class="container text-center">
       <cfscript>
         // If the form is not empty, it has been posted
         if(isDefined("form") and not structIsEmpty(form)) {
-          // writeDump(var="#form#");
-          user = application.userService.trimUserData(form); // trim leading/trailing spaces from inputs
+          user = variables.UserService.trimUserData(form); // trim leading/trailing spaces from inputs
 
-          userDataValid = application.userService.validateUserData(user); // validate the input data
+          userDataValid = variables.UserService.validateUserData(user); // validate the input data
           if( userDataValid ) {
-            Application.userService.dataService.addUser(user.firstname, user.lastname, user.username, user.password);
+            // variables.DataService.addUser(user.firstname, user.lastname, user.username, user.password);
+            retval = invoke('service.user.DataService', 'addUser', {
+              firstname = user.firstname,
+              lastname = user.lastname,
+              username = user.username,
+              password = user.password
+            });
           }
           else {
             errorMessage = "Invalid input"; // set an error msg
