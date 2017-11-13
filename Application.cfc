@@ -27,13 +27,13 @@ component
   * I fire whenever the application is started/restarted
   */
   public boolean function onApplicationStart() output="false" {
-    structClear(application);
+    structClear(Application);
     if(isDefined("session")) structClear(session);
     
     // create some component objects
-    application.BaseAPI     = createObject('component', 'service.api.BaseAPI');
-    application.Security    = createObject('component', 'service.api.Security').init();
-    application.userService = createObject('component', 'service.user.userService').init();
+    Application.BaseAPI     = createObject('component', 'service.api.BaseAPI');
+    Application.Security    = createObject('component', 'service.api.Security').init();
+    // Application.UserService = createObject('component', 'service.user.UserService').init();
     
     writeLog(log="Application", text="Application #this.name# started.", type="information");
 		return true;
